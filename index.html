@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>salfedev — games</title>
+<meta name="description" content="salfedev — independent game developer. Home of Cairo Force, a tower-defense / RTS hybrid for Android.">
+<style>
+  :root {
+    --surface: #0f141f;
+    --surface-raised: #161d2c;
+    --stroke: #52667f;
+    --gold: #e8c266;
+    --cyan: #5fd4e8;
+    --text: #f2ede4;
+    --text-dim: rgba(242, 237, 228, 0.65);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--surface);
+    color: var(--text);
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 24px; flex: 1; }
+  h1 {
+    font-size: 2rem;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .tagline { color: var(--text-dim); margin-bottom: 40px; }
+  .card {
+    background: var(--surface-raised);
+    border: 1px solid var(--stroke);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .card h2 { color: var(--cyan); font-size: 1.25rem; margin-bottom: 8px; }
+  .card p { color: var(--text-dim); margin-bottom: 12px; }
+  a { color: var(--cyan); }
+  .links a { margin-right: 16px; }
+  footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--stroke);
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>salfedev</h1>
+  <p class="tagline">Independent game developer.</p>
+
+  <div class="card">
+    <h2>Cairo Force</h2>
+    <p>A tower-defense / RTS hybrid for Android. Build, repair, and reposition destructible towers against escalating waves across a 12-map desert campaign — plus an endless mode with online leaderboards.</p>
+    <p><em>Status: in development — closed beta on Google Play coming soon.</em></p>
+    <p class="links">
+      <a href="cairo-force/privacy.html">Privacy Policy</a>
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Contact</h2>
+    <p>Questions, feedback, or support: <a href="mailto:sal.abuewilly@gmail.com">sal.abuewilly@gmail.com</a></p>
+  </div>
+</main>
+<footer>&copy; 2026 salfedev (Sal Abuewilly). All rights reserved.</footer>
+</body>
+</html>
