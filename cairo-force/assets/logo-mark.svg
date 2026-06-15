@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="cf-gold" x1="8" y1="4" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f0b429"/>
+      <stop offset="1" stop-color="#c8860a"/>
+    </linearGradient>
+    <linearGradient id="cf-navy" x1="32" y1="8" x2="32" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1a2332"/>
+      <stop offset="1" stop-color="#0a0e17"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="56" height="56" rx="12" fill="url(#cf-navy)" stroke="url(#cf-gold)" stroke-width="2"/>
+  <path d="M32 14 L44 28 L38 28 L38 50 L26 50 L26 28 L20 28 Z" fill="url(#cf-gold)"/>
+  <rect x="22" y="36" width="20" height="3" rx="1" fill="#0a0e17" opacity="0.35"/>
+</svg>

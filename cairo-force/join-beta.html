@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sign up to playtest Cairo Force on Android or volunteer for balance and UX feedback.">
+  <title>Join the Beta — Cairo Force</title>
+  <link rel="stylesheet" href="css/cairo-force.css">
+  <link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a class="site-brand" href="index.html">
+      <img src="assets/logo-mark.svg" alt="" width="36" height="36">
+      <span>Cairo Force</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="privacy.html">Privacy</a>
+      <a href="join-beta.html" aria-current="page">Join Beta</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <header class="hero">
+      <p class="hero-badge">Closed beta</p>
+      <h1>Join the Cairo Force beta</h1>
+      <p class="subtitle">Volunteer for playtesting on Google Play or help with balance, UX, and bug reports between builds.</p>
+    </header>
+
+    <div class="card form-card">
+      <div class="card-inner">
+        <form id="join-beta-form" novalidate>
+          <div class="form-group" id="email-group">
+            <label for="email">Email <span aria-hidden="true">*</span></label>
+            <input type="email" id="email" name="email" autocomplete="email" required aria-required="true" placeholder="you@example.com">
+            <span class="field-error" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="display-name">Display name <span class="hint">(optional — for tester lists)</span></label>
+            <input type="text" id="display-name" name="display_name" autocomplete="nickname" maxlength="64" placeholder="Commander">
+          </div>
+
+          <div class="form-group" id="role-group">
+            <span class="field-label" id="role-label">I want to <span aria-hidden="true">*</span></span>
+            <div class="role-toggle" role="radiogroup" aria-labelledby="role-label">
+              <input type="radio" name="role" id="role-tester" value="Tester" required>
+              <label for="role-tester">Tester</label>
+              <input type="radio" name="role" id="role-volunteer" value="Volunteer">
+              <label for="role-volunteer">Volunteer</label>
+              <input type="radio" name="role" id="role-both" value="Both">
+              <label for="role-both">Both</label>
+            </div>
+            <span class="hint">Tester = install builds from Play. Volunteer = async feedback without a device requirement.</span>
+            <span class="field-error" role="alert"></span>
+          </div>
+
+          <div class="form-group" id="platform-group">
+            <span class="field-label" id="platform-label">Platform <span aria-hidden="true">*</span></span>
+            <div class="checkbox-group" role="group" aria-labelledby="platform-label">
+              <label class="checkbox-row">
+                <input type="checkbox" id="platform-android" name="platform_android" value="Android">
+                Android
+              </label>
+              <label class="checkbox-row">
+                <input type="checkbox" id="platform-other" name="platform_other" value="Other">
+                Other (desktop editor, future iOS, etc.)
+              </label>
+            </div>
+            <span class="field-error" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message <span class="hint">(optional)</span></label>
+            <textarea id="message" name="message" maxlength="2000" placeholder="Device model, timezone, what you'd like to help with…"></textarea>
+          </div>
+
+          <div class="form-group" id="consent-group">
+            <label class="consent-row">
+              <input type="checkbox" id="consent" name="consent" required aria-required="true">
+              <span>I agree to the <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a> and understand my email will be used only for beta invites and related communication.</span>
+            </label>
+            <span class="field-error" role="alert"></span>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="submit-btn">Join the beta</button>
+          </div>
+
+          <div id="form-status" class="form-status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <nav aria-label="Footer">
+      <a href="privacy.html">Privacy</a>
+      <a href="join-beta.html">Join Beta</a>
+      <a href="mailto:sal.abuewilly@gmail.com">Contact</a>
+    </nav>
+    <p class="copy">&copy; 2026 salfedev (Sal Abuewilly). Cairo Force.</p>
+  </footer>
+
+  <script src="js/join-beta.js" defer></script>
+</body>
+</html>

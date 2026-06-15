@@ -1,0 +1,85 @@
+/**
+ * OPTIONAL Firebase Firestore signup backend — example stub only.
+ *
+ * Do NOT commit real Firebase config (apiKey, projectId, etc.) to git.
+ * Copy this file to firebase-signup.js and fill in values from Firebase Console.
+ *
+ * Setup:
+ * 1. Firebase Console → your project → Web app → copy firebaseConfig object.
+ * 2. Firestore → create collection `beta_signups` with rules allowing create-only
+ *    from authenticated or unauthenticated clients (see firebase/firestore.rules).
+ * 3. Replace join-beta.html script tag:
+ *      <script src="js/firebase-signup.js" defer></script>
+ *    instead of join-beta.js (or merge the submit handler below into join-beta.js).
+ *
+ * Required npm/CDN (add to join-beta.html before this script):
+ *   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+ *   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+ *
+ * Firestore document shape (matches Formspree payload):
+ *   { email, display_name, role, platforms, message, created_at: serverTimestamp() }
+ */
+
+/* eslint-disable no-unused-vars */
+
+// Paste from Firebase Console → Project settings → Your apps → Web
+var FIREBASE_CONFIG = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "000000000000",
+  appId: "1:000000000000:web:xxxxxxxx",
+};
+
+(function () {
+  "use strict";
+
+  if (typeof firebase === "undefined") {
+    console.error("Load Firebase compat SDK before firebase-signup.js");
+    return;
+  }
+
+  if (FIREBASE_CONFIG.apiKey === "YOUR_API_KEY") {
+    console.warn("Configure FIREBASE_CONFIG before using Firestore signup.");
+    return;
+  }
+
+  firebase.initializeApp(FIREBASE_CONFIG);
+  var db = firebase.firestore();
+
+  var form = document.getElementById("join-beta-form");
+  if (!form) return;
+
+  form.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    // Reuse validation from join-beta.js or duplicate validateForm() here.
+    var payload = {
+      email: document.getElementById("email").value.trim(),
+      display_name: document.getElementById("display-name").value.trim(),
+      role: (form.querySelector('input[name="role"]:checked') || {}).value || "",
+      platforms: [],
+      message: document.getElementById("message").value.trim(),
+      created_at: firebase.firestore.FieldValue.serverTimestamp(),
+    };
+
+    if (document.getElementById("platform-android").checked) payload.platforms.push("Android");
+    if (document.getElementById("platform-other").checked) payload.platforms.push("Other");
+    payload.platforms = payload.platforms.join(", ");
+
+    db.collection("beta_signups")
+      .add(payload)
+      .then(function () {
+        form.reset();
+        var status = document.getElementById("form-status");
+        status.textContent = "Thanks — you're on the list.";
+        status.className = "form-status is-visible success";
+      })
+      .catch(function (err) {
+        console.error(err);
+        var status = document.getElementById("form-status");
+        status.textContent = "Submission failed. Email sal.abuewilly@gmail.com instead.";
+        status.className = "form-status is-visible error";
+      });
+  });
+})();
