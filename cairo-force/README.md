@@ -16,7 +16,7 @@ Static site for **privacy policy**, **beta signup**, and a minimal landing page.
 | Privacy | `privacy.html` | https://salfedev.github.io/cairo-force/privacy.html |
 | Join beta | `join-beta.html` | https://salfedev.github.io/cairo-force/join-beta.html |
 
-The public site is served from the **`salfedev.github.io/cairo-force`** org/user Pages project (not the private repo URL). Edit files here in `dark-tower`, then sync to the private Pages repo and push.
+The public site is served at **`https://salfedev.github.io/cairo-force/`** via the [`salfedev/salfedev.github.io`](https://github.com/salfedev/salfedev.github.io) user Pages repo (`cairo-force/` subdirectory). The private **`salfedev/cairo-force`** repo holds the same files at repo root as the canonical deploy source (GitHub Pages on private repos requires a paid plan — sync to `salfedev.github.io` for live hosting).
 
 ## Deploy (copy `web/` → private Pages repo)
 
@@ -39,7 +39,18 @@ git clone git@github.com:salfedev/cairo-force.git C:\path\to\cairo-force
 # Copy web/* as above, then push
 ```
 
-**GitHub Pages:** repo **Settings → Pages** → Source: **Deploy from a branch** → Branch **`main`** → folder **`/ (root)`**. The live URL stays `https://salfedev.github.io/cairo-force/` when the org/user Pages site is wired to this repo.
+**GitHub Pages (private repo):** repo **Settings → Pages** → Branch **`main`** / root — requires GitHub Pro on private repos. For free hosting, copy to **`salfedev.github.io/cairo-force/`** (see below).
+
+**Live deploy (user site):**
+
+```powershell
+$UserPages = "C:\path\to\salfedev.github.io"
+Copy-Item -Recurse -Force web\* $UserPages\cairo-force\
+Set-Location $UserPages
+git add cairo-force/
+git commit -m "Sync Cairo Force web from dark-tower"
+git push origin main
+```
 
 ## Local preview
 
@@ -51,20 +62,27 @@ python -m http.server 8080
 
 Or open `index.html` directly in a browser (form submit needs a server for fetch/CORS).
 
-## Formspree setup (recommended default)
+## Formspree setup (optional alternative)
+
+Formspree was the original stub; **live join-beta uses Firestore** (`beta_signups` on `cairo-force-dev`). To use Formspree instead, restore the fetch handler in `join-beta.js` and set `FORM_ACTION`.
 
 1. Create a free form at [formspree.io](https://formspree.io) → copy form ID `xxxxxxxx`.
-2. Edit `web/js/join-beta.js` → replace `PLACEHOLDER`:
+2. Set `var FORM_ACTION = "https://formspree.io/f/xxxxxxxx";` in a custom submit handler.
+3. Redeploy Pages.
 
-   ```javascript
-   var FORM_ACTION = "https://formspree.io/f/xxxxxxxx";
+## Firebase Firestore signup (default — live)
+
+1. Web app **Cairo Force join-beta** on `cairo-force-dev` — config in `js/firebase-config.js`.
+2. `join-beta.html` loads Firebase compat SDK + `firebase-config.js` + `join-beta.js`.
+3. Submissions write to Firestore collection **`beta_signups`** (create-only rules in [`firebase/firestore.rules`](../firebase/firestore.rules)).
+4. Deploy rules after changes:
+
+   ```powershell
+   cd firebase
+   npx firebase-tools deploy --only firestore:rules --project cairo-force-dev
    ```
 
-3. In Formspree dashboard, enable **AJAX** / JSON submissions (default for fetch POST).
-4. Optional: add field names in Formspree (`email`, `display_name`, `role`, `platforms`, `message`).
-5. Redeploy Pages. Test with a real email; check Formspree inbox.
-
-Until `PLACEHOLDER` is replaced, the form shows a configuration error (no data sent).
+5. Sync `web/` to Pages repos (below) and test with a real email; check Firebase Console → Firestore → `beta_signups`.
 
 ## Firebase Firestore alternative
 
@@ -90,7 +108,8 @@ web/
 ├── css/cairo-force.css # Design system
 ├── assets/logo-mark.svg
 ├── assets/menu-logo.png
-├── js/join-beta.js     # Form validation + Formspree submit
+├── js/firebase-config.js # Public Web SDK config (cairo-force-dev)
+├── js/join-beta.js     # Form validation + Firestore submit
 ├── js/site.js          # Privacy section nav (mobile + scroll spy)
 └── js/firebase-signup.js.example
 ```
@@ -98,7 +117,7 @@ web/
 ## Play Console references
 
 - **Privacy policy URL:** `privacy.html` (required for Data safety + store listing).
-- **Beta testers:** share `join-beta.html` link or collect emails from Formspree → add in Play Console **Closed testing** (task **B5** in [`docs/play-release-readiness-tasks.md`](../docs/play-release-readiness-tasks.md)).
+- **Beta testers:** share `join-beta.html` link or collect emails from Firestore `beta_signups` → add in Play Console **Closed testing** (task **B5** in [`docs/play-release-readiness-tasks.md`](../docs/play-release-readiness-tasks.md)).
 
 ## Related docs (dark-tower repo)
 

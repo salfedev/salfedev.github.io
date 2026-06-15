@@ -1,13 +1,10 @@
 (function () {
   "use strict";
 
-  var FORM_ACTION = "https://formspree.io/f/PLACEHOLDER";
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   var form = document.getElementById("join-beta-form");
   if (!form) return;
-
-  form.setAttribute("action", FORM_ACTION);
 
   var emailInput = document.getElementById("email");
   var consentInput = document.getElementById("consent");
@@ -96,6 +93,16 @@
     return ok;
   }
 
+  function getFirestoreDb() {
+    if (typeof firebase === "undefined") return null;
+    var config = window.CAIRO_FORCE_FIREBASE_CONFIG;
+    if (!config || !config.apiKey) return null;
+    if (!firebase.apps.length) {
+      firebase.initializeApp(config);
+    }
+    return firebase.firestore();
+  }
+
   emailInput.addEventListener("input", function () {
     if (emailInput.value.trim() && validateEmail(emailInput.value)) {
       setFieldError("email-group", "");
@@ -106,10 +113,11 @@
     ev.preventDefault();
     if (!validateForm()) return;
 
-    if (FORM_ACTION.indexOf("PLACEHOLDER") !== -1) {
+    var db = getFirestoreDb();
+    if (!db) {
       showStatus(
         "error",
-        "Form is not configured yet. Replace PLACEHOLDER in join-beta.js with your Formspree form ID (see web/README.md)."
+        "Signup backend failed to load. Try again or email sal.abuewilly@gmail.com."
       );
       return;
     }
@@ -123,34 +131,24 @@
       role: getSelectedRole(),
       platforms: getPlatforms().join(", "),
       message: document.getElementById("message").value.trim(),
-      _subject: "Cairo Force beta signup",
+      created_at: firebase.firestore.FieldValue.serverTimestamp(),
     };
 
-    fetch(FORM_ACTION, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    })
-      .then(function (res) {
-        if (res.ok) {
-          form.reset();
-          showStatus(
-            "success",
-            "Thanks — you're on the list. We'll email you when the next beta build is ready."
-          );
-        } else {
-          return res.json().then(function (data) {
-            throw new Error(data.error || "Submission failed.");
-          });
-        }
+    db.collection("beta_signups")
+      .add(payload)
+      .then(function () {
+        form.reset();
+        showStatus(
+          "success",
+          "Thanks — you're on the list. We'll email you when the next beta build is ready."
+        );
       })
       .catch(function (err) {
+        console.error("beta_signups write failed", err);
         showStatus(
           "error",
-          err.message || "Something went wrong. Try again or email sal.abuewilly@gmail.com."
+          err.message ||
+            "Something went wrong. Try again or email sal.abuewilly@gmail.com."
         );
       })
       .finally(function () {
@@ -158,5 +156,4 @@
         submitBtn.textContent = "Join the beta";
       });
   });
-
 })();
