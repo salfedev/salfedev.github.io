@@ -73,14 +73,14 @@
 
           <section id="leaderboard">
             <h2>3. Optional online leaderboard (Firebase)</h2>
-            <p>If you choose to use the online leaderboard, the App uses Google Firebase (Authentication and Cloud Firestore) to store and display scores. As of build <strong>1.7.259</strong>, the leaderboard includes two boards:</p>
+            <p>If you choose to use the online leaderboard, the App uses Google Firebase (Authentication and Cloud Firestore) to store and display scores. As of build <strong>1.7.263</strong>, the leaderboard includes two boards:</p>
             <ul>
               <li><strong>Endless</strong> — your best Endless wave score and the time it was submitted;</li>
               <li><strong>Campaign</strong> — your total campaign star count and the time it was submitted.</li>
             </ul>
             <p>For both boards, we also store:</p>
             <ul>
-              <li>an anonymous account identifier (or your Google account identity, only if you explicitly sign in with Google);</li>
+              <li>an anonymous account identifier (or your Google account identity when you sign in or <strong>link</strong> Google to an existing guest account — the same identifier is kept so scores and display name carry over);</li>
               <li>the display name you choose for the leaderboard.</li>
             </ul>
             <p>This data is used solely to operate the leaderboard. If you never open the leaderboard or never submit a score, no leaderboard data is created.</p>

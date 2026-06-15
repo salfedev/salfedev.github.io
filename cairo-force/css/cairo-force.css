@@ -171,6 +171,14 @@ main {
   background: rgba(212, 168, 83, 0.06);
 }
 
+.hero-logo {
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  margin: 0 auto 1rem;
+}
+
 .hero h1 {
   margin: 0 0 0.75rem;
   font-family: var(--cf-display);
