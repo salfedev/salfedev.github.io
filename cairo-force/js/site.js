@@ -1,6 +1,8 @@
 (function () {
   "use strict";
 
+  initHeroLogoGleam();
+
   var sectionNav = document.querySelector(".section-nav");
   if (!sectionNav) return;
 
@@ -38,5 +40,37 @@
     sections.forEach(function (s) {
       observer.observe(s.sec);
     });
+  }
+
+  /**
+   * Mirror MainMenu UiGleamFx.attach_to_texture_rect — green-gold sweep on logo alpha.
+   * CYCLE_SEC 4.2, SWEEP_FRAC 0.38, shine_angle ~0.35 (diagonal band in CSS).
+   */
+  function initHeroLogoGleam() {
+    var wrap = document.querySelector(".hero-logo-wrap");
+    if (!wrap) return;
+
+    var img = wrap.querySelector(".hero-logo");
+    var shine = wrap.querySelector(".hero-logo-shine");
+    if (!img || !shine) return;
+
+    function applyMask() {
+      var src = img.currentSrc || img.src;
+      if (!src) return;
+      var mask = "url('" + src + "')";
+      shine.style.maskImage = mask;
+      shine.style.webkitMaskImage = mask;
+    }
+
+    if (img.complete) {
+      applyMask();
+    } else {
+      img.addEventListener("load", applyMask, { once: true });
+    }
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    var cycleSec = 4.2;
+    shine.style.animationDelay = (-Math.random() * cycleSec) + "s";
   }
 })();

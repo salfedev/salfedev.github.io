@@ -28,6 +28,10 @@
   --cf-display: "Oswald", "DM Sans", sans-serif;
   --cf-max: 720px;
   --cf-wide: 960px;
+  /* MainMenu UiGleamFx.attach_to_texture_rect — Color(0.88, 1, 0.58), strength 0.3 */
+  --cf-gleam-rgb: 224, 255, 148;
+  --cf-gleam-cycle: 4.2s;
+  --cf-gleam-sweep-frac: 0.38;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -171,12 +175,73 @@ main {
   background: rgba(212, 168, 83, 0.06);
 }
 
-.hero-logo {
+.hero-logo-wrap {
+  position: relative;
   display: block;
   width: 100%;
   max-width: 280px;
-  height: auto;
   margin: 0 auto 1rem;
+}
+
+.hero-logo-wrap .hero-logo {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+
+/* Alpha-aware sweep — mask matches logo PNG; tint matches in-game gleam shader */
+.hero-logo-shine {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  overflow: hidden;
+}
+
+.hero-logo-shine::before {
+  content: "";
+  position: absolute;
+  width: 185%;
+  height: 185%;
+  left: -42%;
+  top: -42%;
+  background: linear-gradient(
+    108deg,
+    transparent 41%,
+    rgba(var(--cf-gleam-rgb), 0.04) 45%,
+    rgba(var(--cf-gleam-rgb), 0.55) 50%,
+    rgba(var(--cf-gleam-rgb), 0.04) 55%,
+    transparent 59%
+  );
+  animation: cf-hero-logo-gleam var(--cf-gleam-cycle) ease-in-out infinite;
+}
+
+@keyframes cf-hero-logo-gleam {
+  0% {
+    transform: translate(-50%, -7%);
+    opacity: 1;
+  }
+  38% {
+    transform: translate(50%, 7%);
+    opacity: 1;
+  }
+  38.01%, 100% {
+    transform: translate(50%, 7%);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-logo-shine::before {
+    animation: none;
+    opacity: 0;
+  }
 }
 
 .hero h1 {
