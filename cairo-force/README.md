@@ -74,7 +74,7 @@ Formspree was the original stub; **live join-beta uses Firestore** (`beta_signup
 
 1. Web app **Cairo Force join-beta** on `cairo-force-dev` — config in `js/firebase-config.js`.
 2. `join-beta.html` loads Firebase compat SDK + `firebase-config.js` + `join-beta.js`.
-3. Submissions write to Firestore collection **`beta_signups`** (create-only rules in [`firebase/firestore.rules`](../firebase/firestore.rules)).
+3. Submissions call Cloud Function **`submitBetaSignup`** (rate-limited server-side); rules block direct Firestore writes.
 4. Deploy rules after changes:
 
    ```powershell
