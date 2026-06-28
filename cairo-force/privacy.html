@@ -26,7 +26,7 @@
       <p class="hero-badge">Legal</p>
       <h1>Privacy Policy</h1>
       <p class="subtitle">What Cairo Force collects, why, and how you stay in control.</p>
-      <p class="meta">Last updated: 15 June 2026</p>
+      <p class="meta">Last updated: 28 June 2026</p>
     </header>
 
     <div class="privacy-layout">
@@ -39,27 +39,28 @@
           <li><a href="#summary">1. Summary</a></li>
           <li><a href="#local-data">2. Device data</a></li>
           <li><a href="#leaderboard">3. Leaderboard</a></li>
-          <li><a href="#analytics">4. Analytics</a></li>
-          <li><a href="#not-collected">5. Not collected</a></li>
-          <li><a href="#retention">6. Retention</a></li>
-          <li><a href="#children">7. Children</a></li>
-          <li><a href="#security">8. Security</a></li>
-          <li><a href="#rights">9. Your rights</a></li>
-          <li><a href="#changes">10. Changes</a></li>
-          <li><a href="#contact">11. Contact</a></li>
+          <li><a href="#analytics">4. App analytics</a></li>
+          <li><a href="#website-analytics">5. Website analytics</a></li>
+          <li><a href="#not-collected">6. Not collected</a></li>
+          <li><a href="#retention">7. Retention</a></li>
+          <li><a href="#children">8. Children</a></li>
+          <li><a href="#security">9. Security</a></li>
+          <li><a href="#rights">10. Your rights</a></li>
+          <li><a href="#changes">11. Changes</a></li>
+          <li><a href="#contact">12. Contact</a></li>
         </ul>
       </nav>
 
       <article class="card">
         <div class="card-inner policy-content">
-          <p>This privacy policy applies to the mobile game <strong>Cairo Force</strong> (the &ldquo;App&rdquo;), developed and published by salfedev (&ldquo;we&rdquo;, &ldquo;us&rdquo;), and distributed via Google Play. It explains what data the App handles, how, and your choices.</p>
+          <p>This privacy policy applies to the mobile game <strong>Cairo Force</strong> (the &ldquo;App&rdquo;), the public marketing website at <a href="https://salfedev.github.io/cairo-force/" rel="noopener noreferrer">salfedev.github.io/cairo-force/</a> (the &ldquo;Website&rdquo;), developed and published by salfedev (&ldquo;we&rdquo;, &ldquo;us&rdquo;). It explains what data the App and Website handle, how, and your choices.</p>
 
           <section id="summary">
             <h2>1. Summary</h2>
             <ul>
               <li>Cairo Force is playable fully offline. The core game does not require an account.</li>
               <li>Game progress and settings are stored locally on your device only.</li>
-              <li>On Android, the App sends privacy-preserving gameplay analytics to Google Firebase Analytics (see section 4). We do not send your name, email, or free-text messages with these events.</li>
+              <li>On Android, the App sends privacy-preserving gameplay analytics to Google Firebase Analytics (see section 4). The Website uses Firebase Analytics for page visits (see section 5). We do not send your name, email, or free-text messages with analytics events.</li>
               <li>The optional online leaderboard is opt-in and uses Google Firebase (see section 3).</li>
               <li>We do not sell your data, and we do not share it with third parties except the service providers listed below.</li>
             </ul>
@@ -86,7 +87,7 @@
           </section>
 
           <section id="analytics">
-            <h2>4. Gameplay analytics (Firebase Analytics)</h2>
+            <h2>4. Gameplay analytics — Android app (Firebase Analytics)</h2>
             <p>On Android builds distributed via Google Play (and equivalent test builds), the App uses Google Firebase Analytics to understand how the game is used and to improve stability and balance. Analytics is on by default and runs without requiring an account.</p>
             <p><strong>What we send from the App</strong> — gameplay events at run boundaries only (never continuously while you play):</p>
             <ul>
@@ -104,8 +105,22 @@
             <p>Editor, desktop, and headless builds do not send analytics events.</p>
           </section>
 
+          <section id="website-analytics">
+            <h2>5. Website analytics — GitHub Pages (Firebase Analytics / GA4)</h2>
+            <p>The public Website (<a href="https://salfedev.github.io/cairo-force/" rel="noopener noreferrer">salfedev.github.io/cairo-force/</a>) — landing page, privacy policy, and beta signup — uses Google Firebase Analytics (Google Analytics 4) to understand how visitors find and use the site. This is separate from the Android gameplay analytics in section 4 and uses the Firebase Web app <strong>Cairo Force join-beta</strong> on project <code>cairo-force-dev</code>.</p>
+            <p><strong>What we send from the Website</strong></p>
+            <ul>
+              <li><code>page_view</code> — when you open a page (includes page title, path, and coarse page name such as landing, privacy, or join_beta);</li>
+              <li><code>beta_signup</code> — when the join-beta form submits successfully (includes chosen role and platform checkboxes only — not your email, display name, or message).</li>
+            </ul>
+            <p><strong>What Google may collect.</strong> As with most web analytics, Google may also process standard technical data needed to deliver the service, such as browser type, device category, approximate geography derived from IP, referral source (how you arrived at the site), and an app-instance identifier. We do not use the Website analytics SDK to read cookies you set elsewhere or to track you across unrelated sites.</p>
+            <p>See the <a href="https://firebase.google.com/support/privacy" rel="noopener noreferrer">Firebase Privacy and Security documentation</a> and <a href="https://policies.google.com/privacy" rel="noopener noreferrer">Google&rsquo;s Privacy Policy</a> for details.</p>
+            <p><strong>Beta signup form.</strong> Submitting the join-beta form still sends your email and optional fields to our Cloud Function for invite lists (unchanged). That submission is operational data for beta communication, not sold or used for ads. Analytics only records a success event without personal fields.</p>
+            <p><strong>Your choices.</strong> The Website does not show a separate cookie banner; analytics runs when you load a page. If you prefer not to be measured, use browser privacy tools, block analytics scripts, or contact us (section 12).</p>
+          </section>
+
           <section id="not-collected">
-            <h2>5. Data we do not collect</h2>
+            <h2>6. Data we do not collect</h2>
             <ul>
               <li>No precise location data.</li>
               <li>No contacts, photos, files, microphone, or camera access.</li>
@@ -116,7 +131,7 @@
           </section>
 
           <section id="retention">
-            <h2>6. Data retention and deletion</h2>
+            <h2>7. Data retention and deletion</h2>
             <ul>
               <li><strong>Local save data:</strong> retained on your device until you delete it (in-game &ldquo;New Game&rdquo; or uninstalling the App).</li>
               <li><strong>Leaderboard data:</strong> retained while the leaderboard service operates. You can request deletion of your leaderboard entry and associated account identifier at any time by emailing us (below); we will remove it within 30 days.</li>
@@ -125,28 +140,28 @@
           </section>
 
           <section id="children">
-            <h2>7. Children</h2>
+            <h2>8. Children</h2>
             <p>The App is not directed at children under 13. We do not knowingly collect personal data from children. If you believe a child has submitted personal data via the leaderboard, contact us and we will delete it.</p>
           </section>
 
           <section id="security">
-            <h2>8. Security</h2>
+            <h2>9. Security</h2>
             <p>Online features transmit data over encrypted connections (HTTPS/TLS). Leaderboard data is stored in Google Firebase with access rules restricting writes to authenticated sessions. Analytics events are sent to Google&rsquo;s Firebase infrastructure. No payment or password data is handled by the App.</p>
           </section>
 
           <section id="rights">
-            <h2>9. Your rights</h2>
+            <h2>10. Your rights</h2>
             <p>Depending on your region (including the EEA and UK under GDPR), you may have the right to access, correct, or delete personal data we hold about you, and the right to lodge a complaint with a supervisory authority.</p>
-            <p>Personal data we may hold directly includes leaderboard data described in section 3. Analytics processing is primarily handled by Google as described in section 4. Contact us to exercise your rights or to request leaderboard deletion or analytics opt-out assistance.</p>
+            <p>Personal data we may hold directly includes leaderboard data described in section 3 and beta signup emails from the Website form. Analytics processing is primarily handled by Google as described in sections 4 and 5. Contact us to exercise your rights or to request leaderboard deletion, beta list removal, or analytics opt-out assistance.</p>
           </section>
 
           <section id="changes">
-            <h2>10. Changes to this policy</h2>
+            <h2>11. Changes to this policy</h2>
             <p>We may update this policy as the App evolves (for example when advertising or in-app purchases are added). Material changes will be reflected on this page with a new &ldquo;Last updated&rdquo; date before they take effect.</p>
           </section>
 
           <section id="contact">
-            <h2>11. Contact</h2>
+            <h2>12. Contact</h2>
             <p><strong>Developer:</strong> salfedev<br>
             <strong>Email:</strong> <a href="mailto:sal.abuewilly@gmail.com">sal.abuewilly@gmail.com</a></p>
           </section>
@@ -169,6 +184,10 @@
     <p class="copy">&copy; 2026 salfedev. Cairo Force.</p>
   </footer>
 
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/analytics.js" defer></script>
   <script src="js/site.js" defer></script>
 </body>
 </html>

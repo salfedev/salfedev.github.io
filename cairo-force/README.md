@@ -2,6 +2,8 @@
 
 Static site for **privacy policy**, **beta signup**, and a minimal landing page. Product name is **Cairo Force** everywhere.
 
+**Analytics:** all public pages load Firebase Analytics (GA4) via `js/analytics.js` + `js/firebase-config.js` (`measurementId` **G-W4HQ5W1SJM**). Logs `page_view` on load; join-beta logs `beta_signup` on successful submit (no email in events). See [`docs/firebase-analytics-assessment.md`](../docs/firebase-analytics-assessment.md).
+
 ## Live site
 
 | | |
@@ -103,13 +105,14 @@ match /beta_signups/{doc} {
 ```
 web/
 ├── index.html          # Landing + game logo hero
-├── privacy.html        # Full policy (11 sections)
+├── privacy.html        # Full policy (12 sections)
 ├── join-beta.html      # Beta / volunteer signup form
 ├── css/cairo-force.css # Design system
 ├── assets/logo-mark.svg
 ├── assets/menu-logo.png
 ├── js/firebase-config.js # Public Web SDK config (cairo-force-dev)
-├── js/join-beta.js     # Form validation + Firestore submit
+├── js/analytics.js       # GA4 init + page_view + event helpers
+├── js/join-beta.js       # Form validation + Cloud Function submit
 ├── js/site.js          # Privacy section nav (mobile + scroll spy)
 └── js/firebase-signup.js.example
 ```

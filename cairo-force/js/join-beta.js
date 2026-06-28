@@ -95,6 +95,9 @@
   }
 
   function initFirebaseApp() {
+    if (window.CairoForceFirebase && window.CairoForceFirebase.ensureApp) {
+      return window.CairoForceFirebase.ensureApp();
+    }
     if (typeof firebase === "undefined") return null;
     var config = window.CAIRO_FORCE_FIREBASE_CONFIG;
     if (!config || !config.apiKey) return null;
@@ -168,6 +171,13 @@
 
     submitSignup(payload)
       .then(function () {
+        if (window.CairoForceFirebase && window.CairoForceFirebase.logEvent) {
+          window.CairoForceFirebase.logEvent("beta_signup", {
+            role: payload.role,
+            platforms: payload.platforms,
+            content_group: "website",
+          });
+        }
         form.reset();
         showStatus(
           "success",
