@@ -13,8 +13,7 @@
 
   <header class="site-header">
     <a class="site-brand" href="index.html">
-      <img src="assets/logo-mark.svg" alt="" width="36" height="36">
-      <span>Cairo Force</span>
+      <img class="site-brand-logo" src="assets/menu-logo.png" alt="Cairo Force" width="132" height="36">
     </a>
     <nav class="site-nav" aria-label="Primary">
       <a href="privacy.html" aria-current="page">Privacy</a>
@@ -92,11 +91,14 @@
             <p><strong>What we send from the App</strong> — gameplay events at run boundaries only (never continuously while you play):</p>
             <ul>
               <li><code>session_start</code> — when you reach the main menu after launch (includes device model, OS version, screen size, locale, and app version — no personal identity);</li>
-              <li><code>session_end</code> — when you leave the App or send it to the background (includes session length in seconds and whether you were in a run or on the main menu);</li>
+              <li><code>session_end</code> — when you leave the App or send it to the background (includes session length in seconds, whether you were in a run or on the main menu, and a gameplay snapshot: stages cleared, towers placed, energy, lives, map and wave when in a run, game mode, and last run outcome);</li>
               <li><code>stage_clear</code> — when you complete a stage (includes map identifier, star count, and run duration in seconds);</li>
-              <li><code>game_over</code> — when a run ends in defeat (includes map identifier and wave reached).</li>
+              <li><code>game_over</code> — when a run ends in defeat (includes map identifier and wave reached);</li>
+              <li><code>screen_view</code> — when you move between main menu, workshop, leaderboard, codex, options, mission or stage select, an active run (screen name includes map identifier when applicable), pause, victory, or game over (screen class matches the screen name — not a generic app bucket);</li>
+              <li><code>app_exception</code> — when the game hits a script error in our code (includes a short error description, source file/line when available, and whether it was fatal — no personal identity).</li>
             </ul>
-            <p>We do not intentionally collect or send your real name, email address, phone number, contacts, photos, precise location, or free-text chat through these events.</p>
+            <p>We do not intentionally collect or send your real name, email address, phone number, contacts, photos, precise location, or free-text chat through these events. Error reports do not include save-file contents or leaderboard display names.</p>
+            <p><strong>Native crashes.</strong> Hard process crashes (for example out-of-memory kills) are not fully captured by the events above until Firebase Crashlytics is enabled in a future build. When enabled, Crashlytics will be disclosed here before release.</p>
             <p><strong>What Google may collect.</strong> Firebase Analytics is operated by Google LLC. As with most mobile analytics SDKs, Google may also process standard device and app-instance identifiers and technical metadata needed to deliver the service (for example app version and device model). See the <a href="https://firebase.google.com/support/privacy" rel="noopener noreferrer">Firebase Privacy and Security documentation</a> and <a href="https://policies.google.com/privacy" rel="noopener noreferrer">Google&rsquo;s Privacy Policy</a> for details.</p>
             <p><strong>Your choices.</strong> Analytics is controlled by an in-app setting stored on your device (<code>analytics_enabled</code>, default on). An in-app toggle in Settings is planned; until then, you may contact us (section 11) to request that we note an opt-out for your device or to ask how to disable collection on your install. When analytics is off, new events are not sent.</p>
             <p>Editor, desktop, and headless builds do not send analytics events.</p>
